@@ -12,8 +12,7 @@ const appRouter = "REPLACE ME";
 
 function App() {
   return (
-    // replace below with a Router Provider
-    <p>REPLACE ME</p>
+    <RouterProvider router={appRouter}></RouterProvider>
   );
 }
 
