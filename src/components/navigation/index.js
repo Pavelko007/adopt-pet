@@ -3,7 +3,7 @@ import { getPetTypes } from '../../api/petfinder';
 import Logo from '../../assets/logo.svg';
 import Search from '../search';
 
-// Import NavLink
+import { NavLink } from 'react-router-dom';
 
 const Navigation = () => {
   const [petTypes, setPetTypes] = useState([]);
@@ -17,6 +17,7 @@ const Navigation = () => {
     getPetTypesData();
   }, []);
 
+  const getNavClass = ({isActive}) => isActive ? 'nav-link nav-link-active' : 'nav-link'
   return (
     <nav>
       <div className="nav-logo">
@@ -26,21 +27,21 @@ const Navigation = () => {
       <ul className="nav-links">
         <li key={'all'}>
           {/* These links should be NavLink component and add a special active class name if its an active link */}
-          <a href="/"
-            className='nav-link'
+          <NavLink to="/"
+            className={getNavClass}
           >
             All Pets
-          </a>
+          </NavLink>
         </li>
         {petTypes
           ? petTypes.map((type) => (
               <li key={type.name}>
                 {/* These links should be NavLink component and add a special active class name if its an active link */}
-                <a href={`/${type._links.self.href.split('/').pop()}`}
+                <NavLink to={`/${type._links.self.href.split('/').pop()}`}
                   key={type.name}
-                  className='nav-link'               >
+                  className={getNavClass}             >
                   {type.name}s
-                </a>{' '}
+                </NavLink>{' '}
               </li>
             ))
           : 'Loading...'}
